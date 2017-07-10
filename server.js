@@ -4,8 +4,8 @@ var request = require('request');
 var cheerio = require('cheerio');
 var app = express();
 
-var img=[]
-  url='http://www.demotywatory.pl';
+var img=[];
+var  url='http://demotywatory.pl';
     request(url,function(error, response, html){
       if(!error){
         var $ = cheerio.load(html);
@@ -16,10 +16,12 @@ var img=[]
 
         });
         console.log(img);
-
         for(var i = 0; i < img.length; i++){
+          if(img[i]!==undefined){
+            console.log('siemanko');
           request(img[i]).pipe(fs.createWriteStream('demot'+(i+1)+'.jpg'));
       }
+    }
 
     }
     })
